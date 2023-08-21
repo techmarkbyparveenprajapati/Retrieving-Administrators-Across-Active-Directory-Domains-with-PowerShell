@@ -1,0 +1,9 @@
+# Get all domains in the forest
+$domains = Get-ADForest | Select-Object -ExpandProperty Domains
+
+# Loop through each domain and retrieve domain administrators
+foreach ($domain in $domains) {
+    Write-Host "Domain: $($domain.Name)"
+    Get-ADGroupMember -Identity "Domain Admins" | Select-Object Name
+    Write-Host ""
+}
